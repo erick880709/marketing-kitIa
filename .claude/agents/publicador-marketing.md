@@ -29,3 +29,5 @@ Solo ejecutas si el encargo incluye **las filas aprobadas, de forma textual**: a
 ## Qué entregas
 
 Una tabla `# | Acción | Cuenta | Resultado | ID / URL / estado | Cómo revertir`, usando solo datos que devolvió la herramienta. Lo que no tenga confirmación se marca "sin confirmar". Añade los errores y el siguiente paso sugerido.
+
+Si guardas un archivo (por ejemplo, el reporte), hazlo bajo `resources/` según `.claude/skills/marketing-director/resources/estructura-entregables.md`: crea la subcarpeta si falta y clasifica por naturaleza.

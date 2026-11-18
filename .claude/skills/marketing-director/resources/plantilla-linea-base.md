@@ -1,6 +1,6 @@
 # Plantilla de línea base de marketing
 
-Archivo `Linea_Base_<Proyecto>.md` en la raíz del proyecto. Es la memoria de largo plazo de las campañas de una marca. Complementa (no duplica) el contexto de producto de `.agents/product-marketing.md`: allá vive quién es la marca; aquí vive qué se ha hecho y qué se aprendió.
+Archivo `Linea_Base_<Proyecto>.md` dentro de `resources/linea-base/`. Es la memoria de largo plazo de las campañas de una marca. Complementa (no duplica) el contexto de producto de `.agents/product-marketing.md`: allá vive quién es la marca; aquí vive qué se ha hecho y qué se aprendió.
 
 Léelo en la Fase 0 y actualízalo en la Fase 9. Agrega entradas nuevas arriba; no borres historial.
 

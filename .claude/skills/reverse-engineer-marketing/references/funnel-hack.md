@@ -22,7 +22,7 @@ Funnel Hack mode in full: buy from the target the way a customer would, and map 
 
 ## Map the Money Path
 
-Screenshot and record each step in `teardowns/<target>/funnel/steps.csv`:
+Screenshot and record each step in `resources/teardowns/<target>/funnel/steps.csv`:
 
 `step,url,screenshot,offer,price,anchor_price,cta,timer_or_scarcity,notes`
 
@@ -72,7 +72,7 @@ Record the ad copy and landing page for each, dated. Hand conquesting findings t
 
 ## Build the Swipe File
 
-One file, `teardowns/<target>/funnel/swipe.md`, grouped by type, every item linked and dated:
+One file, `resources/teardowns/<target>/funnel/swipe.md`, grouped by type, every item linked and dated:
 
 - **Hooks:** first lines of ads, emails, and landing pages
 - **Headlines and subheads**
@@ -85,7 +85,7 @@ Hand the swipe file to **offers**, **copywriting**, and **emails**. Copy the str
 
 ## The Funnel Map Deliverable
 
-`teardowns/<target>/funnel/map.md`:
+`resources/teardowns/<target>/funnel/map.md`:
 
 1. **The diagram:** each step as a box with its price, in order, with branches for declines and abandons
 2. **The offer stack table:** every product and offer, its price, its anchor, and where it appears

@@ -11,7 +11,7 @@ The three-phase workflow that produces a comprehensive marketing plan. SKILL.md 
 Canonical file layout for every plan:
 
 ```
-~/marketing-plans/{client-slug}/
+resources/planes/{client-slug}/
 ├── materials/         # Client-provided files (decks, audit output, brand-voice doc, etc.)
 ├── research.md        # Written in Phase 1 (INIT)
 ├── progress.md        # State machine — see Step 1.1.1 for schema
@@ -59,7 +59,7 @@ sections/02.md, sections/03.md, ... (list as they're written)
 
 ### Step 1.1.2 — Resumption decision tree
 
-**Path safety (applies to every step below).** `{client-slug}` is the client name slugified to lowercase `[a-z0-9-]` only — reject `..`, `/`, and absolute paths, and never read, create, or delete outside `~/marketing-plans/`.
+**Path safety (applies to every step below).** `{client-slug}` is the client name slugified to lowercase `[a-z0-9-]` only — reject `..`, `/`, and absolute paths, and never read, create, or delete outside `resources/planes/`.
 
 On every invocation, check state in this order:
 
@@ -325,7 +325,7 @@ Before printing:
 
 Output `final_plan.md` to the plan folder. Print a summary to chat:
 
-> *"Marketing Plan v1 saved to `~/marketing-plans/{client-slug}/final_plan.md`. ~X,XXX words across 13 sections. Ready to paste into Notion or share with the team."*
+> *"Marketing Plan v1 saved to `resources/planes/{client-slug}/final_plan.md`. ~X,XXX words across 13 sections. Ready to paste into Notion or share with the team."*
 
 ### Step 3.4 — Publish (optional)
 

@@ -98,7 +98,7 @@ Reporta el resultado real que devolvió la herramienta. Si falla, no reintentes 
 
 ## Paso 4. Registrar el estado
 
-Anota en `Linea_Base_<Proyecto>.md`, en la sección "Cuentas y conectores", qué quedó conectado, con qué cuenta (nombre e ID, nunca credenciales) y con qué permisos. Así la próxima campaña no repite el diagnóstico.
+Anota en `resources/linea-base/Linea_Base_<Proyecto>.md`, en la sección "Cuentas y conectores", qué quedó conectado, con qué cuenta (nombre e ID, nunca credenciales) y con qué permisos. Así la próxima campaña no repite el diagnóstico.
 
 ## Conexiones mínimas por tipo de campaña
 

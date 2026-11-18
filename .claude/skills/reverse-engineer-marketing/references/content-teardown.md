@@ -15,7 +15,7 @@ Stage 6 in full: how to work out what a company's best posts have in common, and
 ## Sampling
 
 - **Handles:** only accounts linked from the target's site, or whose bio links back to it. Founders' personal accounts count when the site or press links them.
-- **Window:** up to 100 posts from the last 180 days per channel. Save them to `teardowns/<target>/<channel>/posts.csv` with the pull date.
+- **Window:** up to 100 posts from the last 180 days per channel. Save them to `resources/teardowns/<target>/<channel>/posts.csv` with the pull date.
 - **Settle time:** skip posts younger than 10 days. Their numbers are still moving.
 - **Source:** ScrapeCreators or Apify social actors (see [data-sources.md](data-sources.md)). LinkedIn is read by hand.
 

@@ -7,8 +7,12 @@ credentials*.json
 .claude/settings.local.json
 
 # Datos de clientes y salidas de pruebas (cada persona los genera localmente)
-campanas/
+# Todos los entregables se generan bajo resources/ (ver .claude/skills/marketing-director/resources/estructura-entregables.md)
+/resources/
 .agents/
+
+# Rutas heredadas (mantenidas por si quedan salidas antiguas)
+campanas/
 Linea_Base_*.md
 competitor-profiles/
 teardowns/

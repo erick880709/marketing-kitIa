@@ -30,7 +30,7 @@ Antes de empezar, lee `.claude/skills/marketing-director/SKILL.md` y sigue sus f
 
 ## Pasos
 
-1. **Contexto (fase 0).** Lee `.agents/product-marketing.md` y `Linea_Base_*.md` si existen, además de los adjuntos. Lo que ya está ahí no se vuelve a preguntar. Si no hay contexto de producto y el pedido es más que una pieza suelta, aplica primero la skill `product-marketing` (`.claude/skills/product-marketing/SKILL.md`).
+1. **Contexto (fase 0).** Lee `.agents/product-marketing.md` y `resources/linea-base/Linea_Base_*.md` si existen, además de los adjuntos. Lo que ya está ahí no se vuelve a preguntar. Si no hay contexto de producto y el pedido es más que una pieza suelta, aplica primero la skill `product-marketing` (`.claude/skills/product-marketing/SKILL.md`).
 2. **Interpretar (fase 1).** Clasifica el pedido: `campana-completa`, `seo`, `pauta`, `organico`, `pieza`, `plan`, `diagnostico` o `reporte`. Usa `.claude/skills/marketing-director/resources/intake-preguntas.md`.
 3. **Preguntas mínimas (fase 2).** Usa `vscode/askQuestions` solo para los datos bloqueantes: objetivo, oferta, audiencia y presupuesto si hay pauta. Máximo 3 a 5 preguntas por ronda y 2 rondas. Lo demás márcalo `ASUMIDO`.
 4. **Brief (fase 3).** Redáctalo con `resources/plantilla-brief.md`, con su puntaje de completitud y supuestos. **Pide confirmación** antes de seguir.
@@ -53,3 +53,5 @@ Para un pedido de tipo `pieza` u `organico` con un solo canal, puedes producir t
 ## Reglas
 
 No inventes datos. No publiques ni gastes presupuesto: eso solo ocurre en `publicador-marketing`, tras aprobación explícita. Nunca pidas credenciales en el chat.
+
+Guarda cada entregable bajo `resources/` (raíz del proyecto), clasificado por su naturaleza según `.claude/skills/marketing-director/resources/estructura-entregables.md`: brief en `resources/briefs/`, estrategia en `resources/estrategias/`, reporte en `resources/reportes/` y línea base en `resources/linea-base/`. Si `resources/` o la subcarpeta no existen, créalas antes de escribir. El contexto persistente de `.agents/` no es un entregable y se queda donde está.

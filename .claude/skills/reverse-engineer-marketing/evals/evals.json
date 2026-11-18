@@ -217,7 +217,7 @@
     {
       "id": 17,
       "prompt": "What is Ramp hiring for in marketing right now, and what does it tell us about their next moves?",
-      "expected_output": "Should run teardown.mjs jobs ramp.com --out teardowns/ramp/jobs.csv, check that the board found belongs to Ramp, and report open roles by function, the marketing channels being hired for, tools named in posts, languages required, and any first-hire wording. Should read the full text of the marketing posts for mandates and numbers, compare with an archived careers page for what changed, add each mandate to moves.csv as kind hire with its posting date, and present hiring as where Ramp is investing next (Inferred), not as proof of results. Should not collect recruiter or employee names.",
+      "expected_output": "Should run teardown.mjs jobs ramp.com --out resources/teardowns/ramp/jobs.csv, check that the board found belongs to Ramp, and report open roles by function, the marketing channels being hired for, tools named in posts, languages required, and any first-hire wording. Should read the full text of the marketing posts for mandates and numbers, compare with an archived careers page for what changed, add each mandate to moves.csv as kind hire with its posting date, and present hiring as where Ramp is investing next (Inferred), not as proof of results. Should not collect recruiter or employee names.",
       "assertions": [
         "Runs the jobs command and checks the board belongs to the company",
         "Reports marketing channels, tools, and functions from the summary",

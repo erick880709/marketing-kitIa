@@ -7,7 +7,7 @@ export const meta = {
     { title: 'Estrategia', detail: 'mensaje central, ángulos, canales, KPIs y skills por canal' },
     { title: 'Produccion', detail: 'un agente por canal produce las piezas con sus skills especialistas' },
     { title: 'Revision', detail: 'copy-editing y cumplimiento por canal' },
-    { title: 'Paquete', detail: 'paquete de campaña y tabla de aprobación en campanas/<proyecto>/' },
+    { title: 'Paquete', detail: 'paquete de campaña y tabla de aprobación en resources/campanas/<proyecto>/' },
   ],
 }
 
@@ -49,7 +49,7 @@ const CONTEXTO_SCHEMA = {
   type: 'object',
   properties: {
     contexto_producto: { type: 'string', description: 'resumen de .agents/product-marketing.md o "no existe"' },
-    linea_base: { type: 'string', description: 'resumen de Linea_Base_<Proyecto>.md o "no existe"' },
+    linea_base: { type: 'string', description: 'resumen de resources/linea-base/Linea_Base_<Proyecto>.md o "no existe"' },
     conexiones: {
       type: 'array',
       items: {
@@ -141,7 +141,7 @@ const contexto = await agent(
   `Recoge el contexto de una campaña de marketing. ${REGLAS}
 
 1. Lee .agents/product-marketing.md (o .claude/product-marketing.md) si existe y resúmelo.
-2. Lee Linea_Base_*.md en la raíz del proyecto si existe y resúmelo.
+2. Lee resources/linea-base/Linea_Base_*.md si existe y resúmelo.
 3. Diagnostica conexiones MCP siguiendo el Paso 1 de ${DIRECTOR}/resources/setup-conexiones.md: revisa las herramientas mcp__* disponibles (usa ToolSearch para buscar post-bridge, meta, google ads, hubspot, composio, semrush, canva) y, si puedes, ejecuta "claude mcp list". Solo lectura. No intentes autenticar nada.
 
 Brief de referencia:
@@ -216,7 +216,7 @@ phase('Paquete')
 const paquete = await agent(
   `Arma el paquete de campaña. ${REGLAS}
 
-1. Escribe el archivo campanas/${proyecto}/paquete-campana.md con: resumen de la estrategia, KPIs, prerequisitos, estado de conexiones, y todas las piezas revisadas ordenadas por canal y fecha (texto completo, listo para pegar).
+1. Escribe el archivo resources/campanas/${proyecto}/paquete-campana.md con: resumen de la estrategia, KPIs, prerequisitos, estado de conexiones, y todas las piezas revisadas ordenadas por canal y fecha (texto completo, listo para pegar).
 2. Construye la tabla de aprobación con el formato exacto de ${DIRECTOR}/resources/aprobacion-y-publicacion.md (una fila por acción externa: acción, cuenta/plataforma, contenido o cambio, cuándo, presupuesto, cómo se revierte). Las campañas de pauta van como "Crear campaña (pausada)". Inclúyela también en el archivo.
 3. Para canales sin conector, añade el paquete manual de ${DIRECTOR}/resources/conexiones-mcp.md (sección 4).
 4. Lista "Lo que no pude determinar": todos los FALTA, bloqueantes y canales caídos.

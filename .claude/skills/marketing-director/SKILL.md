@@ -25,7 +25,7 @@ Sigue estas fases en orden. Puedes saltar fases que no apliquen (por ejemplo, un
 Antes de preguntar nada, busca lo que ya se sabe:
 
 - `.agents/product-marketing.md` (o `.claude/product-marketing.md`): contexto de producto, ICP, posicionamiento y voz, mantenido por la skill `product-marketing`.
-- `Linea_Base_<Proyecto>.md` en la raíz del proyecto: historial de campañas, decisiones y aprendizajes de esta marca (formato en `resources/plantilla-linea-base.md`).
+- `resources/linea-base/Linea_Base_<Proyecto>.md`: historial de campañas, decisiones y aprendizajes de esta marca (formato en `resources/plantilla-linea-base.md`).
 - Archivos que el usuario haya adjuntado (brochures, sitio web, campañas anteriores, reportes).
 
 Haz también un **diagnóstico rápido de conexiones MCP** (qué redes y plataformas de anuncios están conectadas) siguiendo el Paso 1 de `resources/setup-conexiones.md`. Si la solicitud implica publicar o pautar y falta el conector, ofrece conectarlo ahora con esa guía o continuar en modo manual; nunca bloquees la campaña por eso.
@@ -95,7 +95,7 @@ Produce o coordina la producción de todas las piezas del plan: textos de anunci
 - `resources/cumplimiento.md` (datos personales, publicidad engañosa, sectores regulados).
 - Que no tenga datos inventados ni "frases de IA" genéricas.
 
-Agrupa las piezas en un **paquete de campaña** ordenado por canal y fecha.
+Agrupa las piezas en un **paquete de campaña** ordenado por canal y fecha. Guarda cada entregable según `resources/estructura-entregables.md`: crea `resources/` y sus subcarpetas si no existen, y clasifica cada pieza en la subcarpeta de su naturaleza.
 
 ### Fase 7 — Gate de aprobación (obligatorio)
 
@@ -111,7 +111,7 @@ Consulta `resources/conexiones-mcp.md` para saber qué conector usar por canal. 
 
 ### Fase 9 — Medición, reporte y aprendizaje
 
-Entrega el reporte con `resources/plantilla-reporte.md`: qué se hizo, qué está pendiente, KPIs y cómo leerlos, puntaje de preparación de la campaña y la sección **"Lo que no pude determinar"**. Luego actualiza `Linea_Base_<Proyecto>.md` con las decisiones, supuestos confirmados y aprendizajes, para que la próxima campaña empiece con más contexto.
+Entrega el reporte con `resources/plantilla-reporte.md`: qué se hizo, qué está pendiente, KPIs y cómo leerlos, puntaje de preparación de la campaña y la sección **"Lo que no pude determinar"**. Guárdalo en `resources/reportes/` (crea la carpeta si no existe). Luego actualiza `resources/linea-base/Linea_Base_<Proyecto>.md` con las decisiones, supuestos confirmados y aprendizajes, para que la próxima campaña empiece con más contexto.
 
 Cuando el usuario vuelva con resultados ("¿cómo va?"), lee las métricas por MCP si hay conector de solo lectura (GA4, Meta Ads, Google Ads, Post Bridge), compáralas contra los KPIs del brief y propón ajustes concretos (mantener, ajustar, apagar), pasando de nuevo por el gate si implican cambios.
 
@@ -136,4 +136,5 @@ Cuando el usuario vuelva con resultados ("¿cómo va?"), lee las métricas por M
 | `resources/cumplimiento.md` | Fase 6, al revisar piezas |
 | `resources/plantilla-reporte.md` | Fase 9 |
 | `resources/plantilla-linea-base.md` | Fases 0 y 9 |
+| `resources/estructura-entregables.md` | Siempre, antes de guardar cualquier entregable: dónde y cómo se escribe |
 | `resources/ejemplos.md` | Si dudas de cómo debe verse una interacción completa |

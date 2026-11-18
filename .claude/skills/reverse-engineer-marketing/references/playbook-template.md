@@ -1,6 +1,6 @@
 # Playbook Template
 
-The teardown's main deliverable, `teardowns/<target>/playbook.md`. Quick mode uses the same sections, trimmed: five plays, headline findings only, no content section.
+The teardown's main deliverable, `resources/teardowns/<target>/playbook.md`. Quick mode uses the same sections, trimmed: five plays, headline findings only, no content section.
 
 ---
 
@@ -111,7 +111,7 @@ Labels: Observed (linked evidence), Inferred (reasoned from evidence), Not found
 
 ## Watch Report Template
 
-`teardowns/<target>/watch-<YYYY-MM>.md`:
+`resources/teardowns/<target>/watch-<YYYY-MM>.md`:
 
 ```markdown
 # [Target]: New Moves, [Month Year]

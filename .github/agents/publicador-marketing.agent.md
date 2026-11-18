@@ -42,4 +42,4 @@ Lee `.claude/skills/marketing-director/resources/aprobacion-y-publicacion.md`. P
 
 ## 4. Reporte (fase 9)
 
-Entrega el reporte con `resources/plantilla-reporte.md`. Cuando haya conectores de solo lectura (GA4, Meta Ads, Google Ads, Post Bridge), compara las métricas contra los KPIs del brief y propón mantener, ajustar o apagar. Actualiza `Linea_Base_<Proyecto>.md`, incluida la sección "Cuentas y conectores", con nombres e IDs de cuenta y nunca credenciales.
+Entrega el reporte con `resources/plantilla-reporte.md` y guárdalo en `resources/reportes/` (crea la carpeta si no existe). Cuando haya conectores de solo lectura (GA4, Meta Ads, Google Ads, Post Bridge), compara las métricas contra los KPIs del brief y propón mantener, ajustar o apagar. Actualiza `resources/linea-base/Linea_Base_<Proyecto>.md`, incluida la sección "Cuentas y conectores", con nombres e IDs de cuenta y nunca credenciales.

@@ -383,7 +383,7 @@ Loops are grouped by function. Naming follows the "The X loop" convention.
   3. Run the script's `diff` against the previous month's log.
   4. For each new move, decide whether it changes a play, and name the skill to hand it to.
 - **Self-check**: Is the move real and dated, with a link? A pixel alone is inferred, so confirm it in the ad library before calling it a new paid channel.
-- **State / idempotency**: One dated move log per month in `teardowns/<target>/`; the diff only reports moves missing from the previous log, so nothing is flagged twice.
+- **State / idempotency**: One dated move log per month in `resources/teardowns/<target>/`; the diff only reports moves missing from the previous log, so nothing is flagged twice.
 - **Stop / bail-out**: No new moves → log "no new moves" and exit. Three straight quiet months → suggest dropping to quarterly.
 - **Output**: A short watch report: new moves with links, which plays they change, and where to hand them.
 

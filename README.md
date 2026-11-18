@@ -23,7 +23,7 @@ No necesitas saber qué skill usar: le hablas al agente y él decide.
 4. **Responde las preguntas, revisa el brief y sigue el flujo.** No conectes redes de clientes reales en las primeras pruebas. Sin conectores, el kit entrega el paquete listo para copiar y pegar.
 5. **Reporta el resultado** en *Issues → New issue → Resultado de prueba del kit*. No pegues datos confidenciales de clientes.
 
-Las salidas de tus pruebas (`campanas/`, `.agents/`, `Linea_Base_*.md`) quedan solo en tu equipo, porque `.gitignore` las excluye.
+Las salidas de tus pruebas (`resources/`, `.agents/`) quedan solo en tu equipo, porque `.gitignore` las excluye.
 
 ---
 
@@ -68,7 +68,7 @@ Marketing/
 │   ├── agents/                       ← director, productor y publicador (encadenados con handoffs)
 │   └── prompts/                      ← /campana-desde-idea, /conectar-redes, /reporte-campana
 ├── .vscode/mcp.ejemplo.json          ← plantilla de servidores MCP para VS Code / Copilot
-├── campanas/<proyecto>/              ← paquetes de campaña generados (no se suben a git)
+├── resources/                        ← entregables generados, en subcarpetas por naturaleza (no se suben a git)
 └── THIRD_PARTY_NOTICES.md            ← licencias de las skills de terceros
 ```
 
@@ -212,7 +212,7 @@ Usuario ──► director-marketing (fases 0-3: contexto, preguntas, brief conf
            Contexto ─► Estrategia ─► [Canal 1: producir → revisar]
                                      [Canal 2: producir → revisar]   (en paralelo)
                                      [Canal N: producir → revisar]
-                       ─► Paquete: campanas/<proyecto>/paquete-campana.md + tabla de aprobación
+                       ─► Paquete: resources/campanas/<proyecto>/paquete-campana.md + tabla de aprobación
                  │
                  ▼
          director-marketing (fase 7 gate con el usuario)
@@ -227,7 +227,7 @@ Usuario ──► director-marketing (fases 0-3: contexto, preguntas, brief conf
 - **Cuándo se usa:** cuando el brief está confirmado y la campaña tiene 3 o más canales. El agente lo ofrece y pide permiso, porque lanza varios agentes y consume más tokens. Con 1 o 2 canales, el director delega en el subagente `productor-marketing`. Las etapas de producción, revisión y paquete del workflow corren con ese mismo subagente, así que necesita `.claude/agents/productor-marketing.md`.
 - **Ejecución manual:** en una sesión de Claude Code, pide *"ejecuta el workflow campana-desde-idea con este brief"* o usa `/workflows` para ver el progreso.
 - **Entradas (`args`):** `brief` (texto del brief confirmado), `proyecto` (slug, usado en la carpeta y en `utm_campaign`), `fecha` (AAAA-MM-DD).
-- **Salidas:** `campanas/<proyecto>/paquete-campana.md` (estrategia, KPIs, piezas revisadas por canal, tabla de aprobación, paquete manual para canales sin conector) y un resumen con canales, estado de conexiones y "Lo que no pude determinar".
+- **Salidas:** `resources/campanas/<proyecto>/paquete-campana.md` (estrategia, KPIs, piezas revisadas por canal, tabla de aprobación, paquete manual para canales sin conector) y un resumen con canales, estado de conexiones y "Lo que no pude determinar".
 - **No publica.** La publicación siempre vuelve a la conversación, con aprobación fila por fila.
 
 ### GitHub Copilot: agentes encadenados con handoffs
@@ -305,7 +305,7 @@ Si faltan, el agente los decide y lo dice: tono, formatos, frecuencia de publica
 | Insumo | Dónde ponerlo | Para qué sirve |
 |---|---|---|
 | Contexto de producto (ICP, posicionamiento, voz) | `.agents/product-marketing.md`. Lo crea la skill `product-marketing` | Evita repetir preguntas en cada campaña |
-| Historial de la marca | `Linea_Base_<Proyecto>.md` en la raíz. Lo crea y actualiza el agente | Decisiones, aprendizajes y cuentas conectadas |
+| Historial de la marca | `resources/linea-base/Linea_Base_<Proyecto>.md`. Lo crea y actualiza el agente | Decisiones, aprendizajes y cuentas conectadas |
 | Documentos | Adjúntalos en el chat: brochure, URL del sitio, reportes, campañas anteriores | Datos reales en vez de supuestos |
 | Métricas | Conectores MCP de solo lectura (GA4, Meta Ads, Google Ads, Post Bridge) o exportes | Diagnósticos y reportes |
 
@@ -324,7 +324,7 @@ Si faltan, el agente los decide y lo dice: tono, formatos, frecuencia de publica
 | **Publicaciones y campañas** | Fase 8 | Posts publicados o en borrador y campañas creadas en pausa, con el ID o URL que devolvió la plataforma. Sin conector: paquete manual paso a paso |
 | **Estado de conexiones** | Fases 0 y 8 | Tabla por canal: conectado, no conectado o requiere autorización |
 | **Reporte** | Fase 9 | Qué se hizo y qué skill lo hizo, pendientes, KPIs y cómo leerlos, puntaje de preparación y "Lo que no pude determinar" |
-| **Línea base actualizada** | Fase 9 | `Linea_Base_<Proyecto>.md` con decisiones, supuestos confirmados, aprendizajes y cuentas conectadas |
+| **Línea base actualizada** | Fase 9 | `resources/linea-base/Linea_Base_<Proyecto>.md` con decisiones, supuestos confirmados, aprendizajes y cuentas conectadas |
 
 Las plantillas están en [.claude/skills/marketing-director/resources/](.claude/skills/marketing-director/resources/).
 
@@ -343,9 +343,9 @@ Origen: **C** = Corey Haines (`coreyhaines31/marketingskills`, MIT). **K** = kos
 | `marketing-director` | N | Idea o pedido en texto libre, adjuntos | Brief, estrategia, paquete de campaña, tabla de aprobación, reporte, línea base |
 | `product-marketing` | C | Información del producto, clientes, competidores, sitio web | `.agents/product-marketing.md`: ICP, posicionamiento, propuesta de valor y voz |
 | `customer-research` | C | Entrevistas, encuestas, reseñas, tickets, foros | Síntesis de investigación, banco de citas del cliente (VOC), personas y JTBD |
-| `competitor-profiling` | C | Nombres o URLs de competidores | Un perfil fechado por competidor en `competitor-profiles/`, con hechos separados de inferencias |
-| `reverse-engineer-marketing` | C | Competidor a analizar, tus datos para comparar | `teardowns/<competidor>/playbook.md`: línea de tiempo de movimientos y jugadas a copiar |
-| `marketing-plan` | C | Empresa o cliente, equipo, presupuesto, metas | `~/marketing-plans/<cliente>/final_plan.md`: canales, presupuesto, equipo, metas AARRR |
+| `competitor-profiling` | C | Nombres o URLs de competidores | Un perfil fechado por competidor en `resources/competidores/`, con hechos separados de inferencias |
+| `reverse-engineer-marketing` | C | Competidor a analizar, tus datos para comparar | `resources/teardowns/<competidor>/playbook.md`: línea de tiempo de movimientos y jugadas a copiar |
+| `marketing-plan` | C | Empresa o cliente, equipo, presupuesto, metas | `resources/planes/<cliente>/final_plan.md`: canales, presupuesto, equipo, metas AARRR |
 | `integrated-marketing` | K | Objetivo y audiencia | Definición del programa, selección de canales, mapa PESO y estructura de campaña |
 | `marketing-council` | C | Decisión con trade-offs | Opiniones simuladas de expertos, desacuerdos y recomendación |
 | `marketing-psychology` | C | Mensaje, página u oferta | Principios de persuasión aplicables y evaluación de honestidad |
@@ -459,18 +459,23 @@ Origen: **C** = Corey Haines (`coreyhaines31/marketingskills`, MIT). **K** = kos
 
 ## 8. Archivos que genera el kit
 
+Todos los entregables se guardan bajo `resources/` en la raíz del proyecto, clasificados en subcarpetas por su naturaleza. La convención completa (y el procedimiento de "crear `resources/` y su subcarpeta si no existen") está en [.claude/skills/marketing-director/resources/estructura-entregables.md](.claude/skills/marketing-director/resources/estructura-entregables.md).
+
 | Archivo o carpeta | Lo genera | Contenido |
 |---|---|---|
-| `.agents/product-marketing.md` | `product-marketing` | Contexto de producto compartido por todas las skills |
-| `Linea_Base_<Proyecto>.md` | `director-marketing` | Historial de campañas, decisiones, aprendizajes y cuentas conectadas |
-| `competitor-profiles/` | `competitor-profiling` | Un perfil por competidor |
-| `teardowns/<competidor>/` | `reverse-engineer-marketing` | Análisis de crecimiento de competidores |
-| `~/marketing-plans/<cliente>/final_plan.md` | `marketing-plan` | Plan de marketing completo |
+| `resources/briefs/` | `director-marketing` | Brief de campaña |
+| `resources/estrategias/` | `director-marketing` | Estrategia y plan (mensaje, ángulos, canales, calendario, KPIs) |
+| `resources/campanas/<proyecto>/paquete-campana.md` | Workflow `campana-desde-idea` o `productor-marketing` | Estrategia, piezas revisadas por canal (en subcarpetas `copy/`, `anuncios/`, `social/`, `email/`, `visual/`, `seo/`, `landing/`, `medicion/`, `aprobacion/`) y tabla de aprobación |
+| `resources/reportes/` | `director-marketing`, `publicador-marketing` | Reporte de campaña |
+| `resources/linea-base/Linea_Base_<Proyecto>.md` | `director-marketing` | Historial de campañas, decisiones, aprendizajes y cuentas conectadas |
+| `resources/competidores/` | `competitor-profiling` | Un perfil por competidor |
+| `resources/teardowns/<competidor>/` | `reverse-engineer-marketing` | Análisis de crecimiento de competidores |
+| `resources/planes/<cliente>/final_plan.md` | `marketing-plan` | Plan de marketing completo |
+| `.agents/product-marketing.md` | `product-marketing` | Contexto de producto compartido por todas las skills (no es un entregable) |
 | `.agents/listening-sources.md` | `social` | Fuentes de escucha social |
 | `.agents/brand.md`, `.agents/design.md` | `image`, `video` | Guías de marca y diseño para piezas visuales |
 | `.agents/advisors/` | `marketing-council` | Perfiles de asesores personalizados |
 | `.mcp.json` | `claude mcp add --scope project` | Servidores MCP del proyecto para Claude Code, sin secretos |
-| `campanas/<proyecto>/paquete-campana.md` | Workflow `campana-desde-idea` o `productor-marketing` | Estrategia, piezas revisadas y tabla de aprobación |
 | `.vscode/mcp.json` | El usuario, a partir de `mcp.ejemplo.json` | Servidores MCP para GitHub Copilot |
 
 El resto de salidas (brief, piezas, reportes) se entregan en la conversación. Pide al agente que las guarde como archivo si las necesitas.

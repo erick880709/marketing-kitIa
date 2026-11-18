@@ -49,7 +49,7 @@ Gather this context (ask for anything missing before the first paid call):
 - **No personal data.** Study the company, not individuals. Public statements by leaders in a work capacity are fine; don't build lists of the target's customers, staff, or followers.
 - **Pause between stages.** Report what you found in three lines, what the next stage checks, and its cost. Continue, skip, or stop as the user prefers. Never pass the data budget cap, or the purchase budget in Funnel Hack mode.
 
-Save everything to `teardowns/<target>/` with the pull date in each file, so the numbers can be rechecked and Watch mode can diff against them.
+Save everything to `resources/teardowns/<target>/` with the pull date in each file, so the numbers can be rechecked and Watch mode can diff against them.
 
 ---
 
@@ -63,7 +63,7 @@ The spine is two files every later stage writes into:
 Run the free collectors first. `scripts/` is inside this skill's directory: call the script by its full path from the user's project (`node <skill-dir>/scripts/teardown.mjs ...`) so outputs land in the project.
 
 ```bash
-node scripts/teardown.mjs site target.com --out teardowns/target/urls.csv   # page families from the sitemap
+node scripts/teardown.mjs site target.com --out resources/teardowns/target/urls.csv   # page families from the sitemap
 node scripts/teardown.mjs stack target.com --months 24                       # first month each pixel or script appears in Wayback
 node scripts/teardown.mjs history target.com/pricing --months 24             # months the pricing changed
 node scripts/teardown.mjs ads "Target" --domain target.com                   # ad library links per network
@@ -201,7 +201,7 @@ Fewer than 24 settled posts on a channel → list them and call no pattern.
 ## Stage 7: Find What Moved the Curve
 
 ```bash
-node scripts/teardown.mjs moves --moves teardowns/target/moves.csv --traffic teardowns/target/traffic.csv --out teardowns/target/moves-vs-growth.csv
+node scripts/teardown.mjs moves --moves resources/teardowns/target/moves.csv --traffic resources/teardowns/target/traffic.csv --out resources/teardowns/target/moves-vs-growth.csv
 ```
 
 - Moves within six weeks of each other form one **cluster**. Credit the cluster, never a single move inside it.
@@ -250,7 +250,7 @@ Once a teardown exists, rerun it monthly and report only what's new.
 1. Re-run `stack`, `history`, `hero`, `site`, `dns`, `subdomains`, `jobs`, and `reviews`, plus the industry pack's commands (`shopify`, `cfpb`, `fdic`, `filings`, `adoption`), check the ad libraries and paid promotion, and pull the last month's posts and new interviews. Append new dated moves to a fresh `moves.csv`.
 2. Diff the new log against the old one:
    ```bash
-   node scripts/teardown.mjs diff --old teardowns/target/moves-2026-09.csv --new teardowns/target/moves.csv --out teardowns/target/new-moves.csv
+   node scripts/teardown.mjs diff --old resources/teardowns/target/moves-2026-09.csv --new resources/teardowns/target/moves.csv --out resources/teardowns/target/new-moves.csv
    ```
 3. Report only meaningful new moves: a new ad network, a new page family, a new loop, a pricing change, a new content format, a burst of hiring in one channel, a new complaint theme.
 
@@ -261,9 +261,9 @@ To schedule it, run it as the growth-move watch loop in **marketing-loops**, kee
 
 ## Output Format
 
-In `teardowns/<target>/`:
+In `resources/teardowns/<target>/`:
 
-1. **`playbook.md`** (`content.md` in Content mode, `watch-<month>.md` in Watch mode, `teardowns/landscape/landscape.md` in Landscape mode): summary, curve and inflection, timeline, funnel findings, inside-the-product storyboard, team claims, hidden signals, content patterns, gap table, where they're weak, plays with prompts, plays to skip, method notes
+1. **`playbook.md`** (`content.md` in Content mode, `watch-<month>.md` in Watch mode, `resources/teardowns/landscape/landscape.md` in Landscape mode): summary, curve and inflection, timeline, funnel findings, inside-the-product storyboard, team claims, hidden signals, content patterns, gap table, where they're weak, plays with prompts, plays to skip, method notes
 2. **Data**: `traffic.csv`, `moves.csv`, `moves-vs-growth.csv`, `urls.csv`, `voices.csv`, `jobs.csv`, `reviews.csv`, `inside/emails.csv`, posts per channel
 3. **Screenshots**: `inside/screens/`, numbered in flow order
 4. **Contact sheets**: top vs bottom thumbnails per channel

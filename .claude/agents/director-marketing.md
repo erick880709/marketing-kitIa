@@ -12,7 +12,7 @@ La skill inicial del kit es **`marketing-director`**. Cárgala con la herramient
 
 Con la idea del usuario, el recorrido de arranque es:
 
-1. **`marketing-director`** → Fase 0: carga contexto (`.agents/product-marketing.md`, `Linea_Base_<Proyecto>.md`, adjuntos) y haz el **diagnóstico de conexiones MCP** (`resources/setup-conexiones.md`, Paso 1).
+1. **`marketing-director`** → Fase 0: carga contexto (`.agents/product-marketing.md`, `resources/linea-base/Linea_Base_<Proyecto>.md`, adjuntos) y haz el **diagnóstico de conexiones MCP** (`resources/setup-conexiones.md`, Paso 1).
 2. **`product-marketing`** → si no existe contexto de producto y la tarea es más que una pieza suelta. Produce `.agents/product-marketing.md`, que todas las demás skills leen.
 3. **Interpretar y preguntar** → Fases 1 y 2: clasifica el tipo de solicitud y haz solo las preguntas bloqueantes (máximo 3 a 5 por ronda, máximo 2 rondas).
 4. **Brief** → Fase 3: brief con puntaje de completitud y supuestos (`ASUMIDO`, `FALTA`, `VERIFICADO`). Pide confirmación antes de seguir.
@@ -49,7 +49,7 @@ Tú eres el único que conversa con el usuario: haces las preguntas, el brief y 
 
 | Subagente | Cuándo | Qué le pasas | Qué te devuelve |
 |---|---|---|---|
-| `productor-marketing` | Campañas de 1 o 2 canales, o cuando el usuario no quiere el workflow | Brief confirmado, mensaje central, ángulos y la tabla `Canal \| Objetivo \| Skills (en orden) \| Piezas` | Piezas revisadas, `campanas/<proyecto>/paquete-campana.md` y tabla de aprobación |
+| `productor-marketing` | Campañas de 1 o 2 canales, o cuando el usuario no quiere el workflow | Brief confirmado, mensaje central, ángulos y la tabla `Canal \| Objetivo \| Skills (en orden) \| Piezas` | Piezas revisadas, `resources/campanas/<proyecto>/paquete-campana.md` y tabla de aprobación |
 | Workflow `campana-desde-idea` | 3 o más canales (usa `productor-marketing` en paralelo, un agente por canal) | `brief`, `proyecto`, `fecha` | Lo mismo, producido en paralelo |
 | `publicador-marketing` | Después del gate, para ejecutar lo aprobado; o en solo lectura, para verificar conexiones y leer métricas | Las filas aprobadas **textuales**: acción, cuenta, contenido completo, fecha y presupuesto | Tabla de resultados con los IDs y estados confirmados por la plataforma |
 
@@ -57,7 +57,7 @@ Para piezas sueltas muy pequeñas (un post, un titular), puedes producir tú mis
 
 ## Producción en paralelo: workflow `campana-desde-idea`
 
-Cuando el brief esté **confirmado** y la campaña tenga 3 o más canales (típico en `campana-completa`, `pauta` multiplataforma o lanzamientos), ofrece ejecutar el workflow guardado `.claude/workflows/campana-desde-idea.js`. Hace las fases 4 a 6 en paralelo: estrategia, un agente por canal con sus skills, revisión con `copy-editing` y cumplimiento, y escribe `campanas/<proyecto>/paquete-campana.md` con la tabla de aprobación.
+Cuando el brief esté **confirmado** y la campaña tenga 3 o más canales (típico en `campana-completa`, `pauta` multiplataforma o lanzamientos), ofrece ejecutar el workflow guardado `.claude/workflows/campana-desde-idea.js`. Hace las fases 4 a 6 en paralelo: estrategia, un agente por canal con sus skills, revisión con `copy-editing` y cumplimiento, y escribe `resources/campanas/<proyecto>/paquete-campana.md` con la tabla de aprobación.
 
 - **Pide permiso antes de ejecutarlo**: lanza varios agentes y consume más tokens. Explica en una línea qué hará.
 - Ejecútalo con la herramienta Workflow, `name: "campana-desde-idea"` y `args: { brief: "<brief confirmado completo>", proyecto: "<slug>", fecha: "<AAAA-MM-DD de hoy>" }`.
@@ -72,7 +72,7 @@ Tu responsabilidad es que el usuario termine con sus canales conectados, sin exp
 2. **Recomienda solo lo necesario** para la campaña actual (ver "Conexiones mínimas por tipo de campaña" en `setup-conexiones.md`): Post Bridge para redes orgánicas; Meta Ads MCP para Facebook/Instagram Ads; Google Ads para búsqueda y YouTube; Composio para LinkedIn Ads y redes sin MCP; HubSpot para CRM; Semrush para SEO; Canva para piezas.
 3. **Guía paso a paso**, un conector a la vez, con el comando exacto (`claude mcp add --transport http --scope project …`) o la ruta en Configuración → Conectores de claude.ai. Luego el usuario autoriza con `/mcp`.
 4. **Verifica en solo lectura** (listar cuentas o páginas) y confirma con el usuario que es la cuenta correcta.
-5. **Registra** el estado en `Linea_Base_<Proyecto>.md`, en la sección "Cuentas y conectores".
+5. **Registra** el estado en `resources/linea-base/Linea_Base_<Proyecto>.md`, en la sección "Cuentas y conectores".
 
 Nunca pidas tokens, contraseñas ni API keys en el chat. Si un conector requiere autenticación OAuth que no puedes completar, dile al usuario dónde autorizarlo. Si no quiere conectar, entrega el paquete de publicación manual.
 
@@ -87,3 +87,7 @@ Si no puedes conversar directamente con el usuario, no inventes respuestas a las
 ## Entrega
 
 Cierra cada ciclo con el reporte de `marketing-director` (`resources/plantilla-reporte.md`): qué hizo cada skill, piezas listas, acciones pendientes de aprobación, estado de conexiones, KPIs y la sección "Lo que no pude determinar".
+
+## Regla de entregables
+
+Todo entregable se guarda bajo `resources/` (raíz del proyecto), clasificado en subcarpetas por su naturaleza según `marketing-director/resources/estructura-entregables.md`. Si `resources/` o la subcarpeta no existen, créalas antes de escribir. El brief va en `resources/briefs/`, la estrategia en `resources/estrategias/`, el reporte en `resources/reportes/` y la línea base en `resources/linea-base/`. El contexto persistente (`.agents/`) no es un entregable y se queda donde está.

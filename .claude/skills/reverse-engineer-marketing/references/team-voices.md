@@ -38,7 +38,7 @@ Keep it to people speaking publicly in a work capacity. Don't profile private li
 
 - **YouTube, TikTok, X videos:** transcripts via [ScrapeCreators](../../../tools/integrations/scrapecreators.md) (`/v1/youtube/video/transcript`, `/v1/tiktok/video/transcript`, `/v1/twitter/tweet/transcript`), or YouTube's own captions.
 - **Podcasts:** many feeds publish transcripts (a `podcast:transcript` tag in the RSS feed), and many shows post episodes to YouTube too. Otherwise, download the audio and transcribe it locally.
-- Save each transcript to `teardowns/<target>/voices/<date>-<person>-<show>.txt` with the source link.
+- Save each transcript to `resources/teardowns/<target>/voices/<date>-<person>-<show>.txt` with the source link.
 
 ## Extracting Claims
 
@@ -59,7 +59,7 @@ Then look for:
 
 ## Job Posts as Strategy Documents
 
-Read the full text of current and past job posts, not just titles. Start with `teardown.mjs jobs <domain> --out teardowns/<target>/jobs.csv`, which finds a public Greenhouse, Lever, or Ashby board and summarizes it: roles by function, marketing channels being hired for, tools named, languages required, and "first marketing hire" wording. Past posts are on Wayback (`web.archive.org/web/*/target.com/careers*`) and on job boards. Saving `jobs.csv` each month lets Watch mode spot new roles by id.
+Read the full text of current and past job posts, not just titles. Start with `teardown.mjs jobs <domain> --out resources/teardowns/<target>/jobs.csv`, which finds a public Greenhouse, Lever, or Ashby board and summarizes it: roles by function, marketing channels being hired for, tools named, languages required, and "first marketing hire" wording. Past posts are on Wayback (`web.archive.org/web/*/target.com/careers*`) and on job boards. Saving `jobs.csv` each month lets Watch mode spot new roles by id.
 
 What to pull from each post:
 - **The mandate:** "own our PLG motion", "scale programmatic SEO to 10,000 pages", "launch our partner program", "build our first outbound team". This is the plan, written down.

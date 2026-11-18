@@ -73,7 +73,7 @@ Before synthesizing the profile, persist all raw scrape, SEO, and review data to
 **Directory layout** (relative to project root):
 
 ```
-competitor-profiles/
+resources/competidores/
 ├── raw/
 │   └── <competitor-slug>/
 │       └── <YYYY-MM-DD>/
@@ -131,7 +131,7 @@ Use **Firecrawl Scrape** on each identified page:
 firecrawl_scrape → each key page URL
 ```
 
-Save each result to `competitor-profiles/raw/<competitor-slug>/<YYYY-MM-DD>/scrapes/<page-name>.md` before extracting fields.
+Save each result to `resources/competidores/raw/<competitor-slug>/<YYYY-MM-DD>/scrapes/<page-name>.md` before extracting fields.
 
 Extract from each page:
 
@@ -153,13 +153,13 @@ Use **Firecrawl Scrape** or **Firecrawl Search** to find:
 - Product Hunt launch page
 - TrustRadius profile
 
-Save each scraped review page to `competitor-profiles/raw/<competitor-slug>/<YYYY-MM-DD>/reviews/<source>.md`. Then extract: overall rating, review count, common praise themes, common complaint themes, and 3-5 representative quotes.
+Save each scraped review page to `resources/competidores/raw/<competitor-slug>/<YYYY-MM-DD>/reviews/<source>.md`. Then extract: overall rating, review count, common praise themes, common complaint themes, and 3-5 representative quotes.
 
 ---
 
 ### Phase 2: SEO & Market Data (DataForSEO or Ubersuggest)
 
-Use DataForSEO MCP tools to gather quantitative competitive intelligence. **If DataForSEO is unavailable**, use whichever SEO data source is connected (Ahrefs or Semrush MCP, Ubersuggest MCP, or similar). Most cover domain traffic, keyword rankings, backlinks, referring domains, top pages, and organic competitors. [references/tool-reference.md](references/tool-reference.md) maps the Ubersuggest tools as a worked example. Save each raw response as JSON to `competitor-profiles/raw/<competitor-slug>/<YYYY-MM-DD>/seo/<endpoint-name>.json` before parsing it into the profile. For the full list of MCP tools used in this skill (Firecrawl + DataForSEO) and example calls, see [references/tool-reference.md](references/tool-reference.md).
+Use DataForSEO MCP tools to gather quantitative competitive intelligence. **If DataForSEO is unavailable**, use whichever SEO data source is connected (Ahrefs or Semrush MCP, Ubersuggest MCP, or similar). Most cover domain traffic, keyword rankings, backlinks, referring domains, top pages, and organic competitors. [references/tool-reference.md](references/tool-reference.md) maps the Ubersuggest tools as a worked example. Save each raw response as JSON to `resources/competidores/raw/<competitor-slug>/<YYYY-MM-DD>/seo/<endpoint-name>.json` before parsing it into the profile. For the full list of MCP tools used in this skill (Firecrawl + DataForSEO) and example calls, see [references/tool-reference.md](references/tool-reference.md).
 
 #### Domain Authority & Backlinks
 
@@ -211,9 +211,9 @@ Combine scraped content with SEO data to build the profile. Cross-reference clai
 
 ### Profile Document Structure
 
-Generate one markdown file per competitor, saved to a `competitor-profiles/` directory in the project root.
+Generate one markdown file per competitor, saved to a `resources/competidores/` directory in the project root.
 
-**Filename**: `competitor-profiles/[competitor-name].md`
+**Filename**: `resources/competidores/[competitor-name].md`
 
 **For the full profile and summary templates**: See [references/templates.md](references/templates.md)
 
@@ -365,7 +365,7 @@ Each profile follows this structure:
 
 ### Summary Document
 
-After profiling all competitors, generate a `competitor-profiles/_summary.md` that includes:
+After profiling all competitors, generate a `resources/competidores/_summary.md` that includes:
 
 1. **Competitor landscape overview** — one paragraph summarizing the competitive field
 2. **Comparison table** — key metrics side by side for all profiled competitors

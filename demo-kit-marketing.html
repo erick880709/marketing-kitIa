@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kit de Marketing Agéntico — Demo ilustrativa</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --panel: #1e293b;
+    --panel-2: #273449;
+    --line: #334155;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --brand: #7c3aed;
+    --brand-2: #a78bfa;
+    --accent: #22c55e;
+    --warn: #f59e0b;
+    --danger: #ef4444;
+    --info: #38bdf8;
+    --radius: 14px;
+    --mono: ui-monospace, SFMono-Regular, "Cascadia Code", Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: radial-gradient(1200px 600px at 15% -10%, #1e1b4b 0%, var(--bg) 55%);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 40px 24px 80px; }
+  header.hero { text-align: center; padding: 28px 0 10px; }
+  .kicker {
+    display: inline-block; background: rgba(124,58,237,.18); border: 1px solid rgba(167,139,250,.4);
+    color: var(--brand-2); font-weight: 600; font-size: .8rem; letter-spacing: .08em;
+    text-transform: uppercase; padding: 6px 14px; border-radius: 999px; margin-bottom: 14px;
+  }
+  h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); margin: 0 0 10px; letter-spacing: -.02em; }
+  h1 .grad { background: linear-gradient(90deg, var(--brand-2), #38bdf8); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sub { color: var(--muted); max-width: 760px; margin: 0 auto; font-size: 1.05rem; }
+  h2 { font-size: 1.35rem; margin: 48px 0 16px; letter-spacing: -.01em; display: flex; align-items: center; gap: 10px; }
+  h2 .num { background: var(--brand); color: #fff; width: 30px; height: 30px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-size: .95rem; }
+  h3 { font-size: 1.05rem; margin: 20px 0 8px; color: var(--brand-2); }
+  p { margin: 8px 0; }
+  a { color: var(--brand-2); }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; margin: 14px 0; }
+  .grid { display: grid; gap: 14px; }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .grid-4 { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+  .pill { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: .75rem; font-weight: 600; border: 1px solid var(--line); background: var(--panel-2); }
+  .pill.v { color: #4ade80; border-color: rgba(34,197,94,.4); }
+  .pill.a { color: #fbbf24; border-color: rgba(245,158,11,.4); }
+  .pill.f { color: #f87171; border-color: rgba(239,68,68,.4); }
+  .pill.chan { color: #7dd3fc; border-color: rgba(56,189,248,.4); }
+  .tag { font-family: var(--mono); font-size: .72rem; }
+  table { width: 100%; border-collapse: collapse; font-size: .88rem; margin: 10px 0; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--brand-2); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; background: rgba(124,58,237,.08); }
+  tr:last-child td { border-bottom: none; }
+  .mono { font-family: var(--mono); font-size: .82rem; }
+  .chat { display: flex; flex-direction: column; gap: 10px; }
+  .msg { max-width: 85%; padding: 10px 14px; border-radius: 14px; font-size: .92rem; }
+  .msg.user { align-self: flex-end; background: var(--brand); border-bottom-right-radius: 4px; }
+  .msg.agent { align-self: flex-start; background: var(--panel-2); border: 1px solid var(--line); border-bottom-left-radius: 4px; }
+  .flow { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+  .flow .step {
+    flex: 1 1 120px; background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px;
+    padding: 10px 12px; font-size: .8rem; text-align: center;
+  }
+  .flow .step b { display: block; color: var(--brand-2); font-size: .9rem; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 4px; }
+  .tab {
+    background: var(--panel-2); border: 1px solid var(--line); color: var(--muted);
+    padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: .82rem; font-weight: 600;
+  }
+  .tab.active { background: var(--brand); color: #fff; border-color: var(--brand); }
+  .tabpane { display: none; animation: fade .25s ease; }
+  .tabpane.active { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  .doc { background: #0b1120; border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; font-size: .9rem; }
+  .doc h4 { margin: 14px 0 6px; color: var(--text); font-size: .95rem; }
+  .doc h4:first-child { margin-top: 0; }
+  .doc .meta { color: var(--muted); font-size: .8rem; }
+  .kpi { background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; padding: 12px; text-align: center; }
+  .kpi b { display: block; font-size: 1.25rem; color: var(--accent); }
+  .kpi span { font-size: .78rem; color: var(--muted); }
+  .note { border-left: 3px solid var(--brand-2); background: rgba(124,58,237,.1); padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: .88rem; margin: 12px 0; }
+  .warn { border-left-color: var(--warn); background: rgba(245,158,11,.1); }
+  .ok { border-left-color: var(--accent); background: rgba(34,197,94,.1); }
+  code.inline { font-family: var(--mono); font-size: .82rem; background: var(--panel-2); padding: 1px 6px; border-radius: 5px; }
+  footer { text-align: center; color: var(--muted); font-size: .8rem; margin-top: 60px; }
+  ul { margin: 8px 0; padding-left: 20px; }
+  li { margin: 4px 0; }
+  .badge-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .bd-v { background: #22c55e; } .bd-a { background: #f59e0b; } .bd-f { background: #ef4444; }
+  .skillchain { font-family: var(--mono); font-size: .85rem; color: #7dd3fc; background: var(--panel-2); padding: 12px 14px; border-radius: 10px; line-height: 1.9; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="kicker">Demo ilustrativa · no es una campaña real</span>
+    <h1>Kit de Marketing <span class="grad">Agéntico</span></h1>
+    <p class="sub">De una idea en una frase a una campaña completa: brief, estrategia, piezas por canal, tabla de aprobación, publicación y reporte. Todo con 1 agente coordinador y ~89 skills especialistas.</p>
+  </header>
+
+  <!-- ======================= QUÉ ES ======================= -->
+  <h2><span class="num">1</span> Qué es y cómo se usa</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>El agente coordinador</h3>
+      <p>Le hablas en lenguaje natural. Él clasifica tu pedido, hace <b>solo las preguntas bloqueantes</b> (máx. 2 rondas de 3–5), arma el brief, define estrategia, delega en las skills y hace el <b>gate de aprobación</b> antes de publicar.</p>
+      <p class="mono" style="color:var(--muted)">Claude Code: <span style="color:#a78bfa">claude --agent director-marketing</span><br>Copilot: <span style="color:#a78bfa">/campana-desde-idea</span></p>
+    </div>
+    <div class="card">
+      <h3>89 skills especialistas</h3>
+      <p>Cada una hace bien un trabajo. Se agrupan en: <b>estrategia</b>, <b>oferta y precio</b>, <b>SEO</b>, <b>pauta y medición</b>, <b>contenido y redes</b>, y <b>marca</b>. El agente elige cuáles y en qué orden.</p>
+      <p class="mono" style="color:#7dd3fc">copywriting · ads · linkedin-ads · seo-audit · keyword-research · emails · social · cro · analytics · conversion-tracking · …</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>El flujo de 9 fases</h3>
+    <div class="flow">
+      <div class="step"><b>0 · Contexto</b>lee adjuntos, línea base y conexiones</div>
+      <div class="step"><b>1 · Interpretar</b>clasifica tu pedido</div>
+      <div class="step"><b>2 · Preguntas</b>solo lo bloqueante</div>
+      <div class="step"><b>3 · Brief</b>objetivo, audiencia, completitud</div>
+      <div class="step"><b>4 · Estrategia</b>mensaje, canales, KPIs</div>
+      <div class="step"><b>5 · Delegación</b>llama a las skills</div>
+      <div class="step"><b>6 · Producción</b>piezas revisadas</div>
+      <div class="step"><b>7 · Aprobación</b>fila por fila</div>
+      <div class="step"><b>8 · Publicación</b>MCP o paquete manual</div>
+      <div class="step"><b>9 · Reporte</b>KPIs y línea base</div>
+    </div>
+    <div class="note warn"><b>Reglas que no se rompen:</b> nada se publica ni se gasta sin tu aprobación explícita · campañas nuevas en <b>pausa</b> · <b>no se inventan datos</b> (todo va <span class="pill v">VERIFICADO</span> / <span class="pill a">ASUMIDO</span> / <span class="pill f">FALTA</span>) · nunca se piden credenciales en el chat.</div>
+  </div>
+
+  <!-- ======================= EJEMPLO ======================= -->
+  <h2><span class="num">2</span> Ejemplo completo paso a paso</h2>
+  <p style="color:var(--muted)">Pedido real que usaremos: <em>“Quiero conseguir 20 reuniones con gerentes de TI de empresas medianas en Colombia para nuestro servicio de QA automatizado.”</em> Los números y textos son de ejemplo.</p>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-pane="p0">0–2 Entrada</button>
+    <button class="tab" data-pane="p3">3 Brief</button>
+    <button class="tab" data-pane="p4">4 Estrategia</button>
+    <button class="tab" data-pane="p56">5–6 Producción</button>
+    <button class="tab" data-pane="p7">7 Aprobación</button>
+    <button class="tab" data-pane="p89">8–9 Publicación y reporte</button>
+  </div>
+
+  <!-- PANE 0 -->
+  <div class="tabpane active" id="p0">
+    <div class="card">
+      <h3>Fase 0 · Contexto</h3>
+      <table>
+        <tr><th>Insumo</th><th>Estado</th></tr>
+        <tr><td>Adjuntos</td><td>Brochure del servicio + URL del sitio web</td></tr>
+        <tr><td>Línea base</td><td>Nueva marca, sin historial previo → se creará <code class="inline">resources/linea-base/Linea_Base_QA-Colombia.md</code></td></tr>
+        <tr><td>Redes conectadas</td><td>LinkedIn vía Post Bridge ✅ · Meta Ads ❌ (sin conector)</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Fase 1 · Interpretar</h3>
+      <p>Clasifica el pedido como <span class="pill chan">campaña completa</span>. Audiencia B2B (servicio técnico a empresas) → <span class="pill a">ASUMIDO</span>. Objetivo: generación de demanda → <span class="pill a">ASUMIDO</span>. Faltan datos bloqueantes.</p>
+    </div>
+    <div class="card">
+      <h3>Fase 2 · Preguntas (una sola ronda)</h3>
+      <div class="chat">
+        <div class="msg user">Quiero conseguir 20 reuniones con gerentes de TI de empresas medianas en Colombia para nuestro servicio de QA automatizado.</div>
+        <div class="msg agent">Voy a armar la campaña. Solo 4 preguntas bloqueantes:<br>
+          1. ¿Quién decide la compra? <i>· Gerente de TI / CTO · Líder de QA · Gerente de proyecto</i><br>
+          2. Cuando alguien vea la campaña, ¿qué debe hacer? <i>· Agendar reunión · Descargar guía · Escribir por WhatsApp</i><br>
+          3. ¿Hay presupuesto para pauta? ¿Cuánto al mes?<br>
+          4. ¿A dónde llevamos el clic? ¿Tienen página de agendamiento?</div>
+        <div class="msg user">Decide el Gerente de TI o CTO. Acción: agendar una reunión de 30 min. Presupuesto 3.500.000 COP/mes en LinkedIn Ads. Tenemos Calendly.</div>
+      </div>
+      <div class="note ok">Con eso ya puede producir. Tono, formatos y frecuencia <b>no se preguntan</b>: se asumen y se muestran.</div>
+    </div>
+  </div>
+
+  <!-- PANE 3 -->
+  <div class="tabpane" id="p3">
+    <div class="doc">
+      <h4 style="color:#a78bfa">Brief de campaña: QA-Colombia</h4>
+      <p class="meta">Tipo: campaña completa · Fecha: 2026-11-18 · Completitud: <b style="color:#4ade80">85/100</b></p>
+      <h4>1 · Objetivo</h4>
+      <p>Objetivo de negocio: conseguir clientes B2B para el servicio de QA automatizado <span class="pill v">VERIFICADO</span><br>
+      Meta medible: 20 reuniones agendadas en 8 semanas <span class="pill v">VERIFICADO</span></p>
+      <h4>2 · Oferta</h4>
+      <p>Servicio de pruebas automatizadas de software <span class="pill v">VERIFICADO</span><br>
+      Propuesta de valor: “Lanza sin miedo: detectamos los bugs antes que tus usuarios” <span class="pill a">ASUMIDO</span><br>
+      Prueba social: sin casos ni cifras aún <span class="pill f">FALTA</span></p>
+      <h4>3 · Audiencia</h4>
+      <p>Gerentes de TI / CTO de empresas medianas en Colombia <span class="pill v">VERIFICADO</span><br>
+      Dolor: releases lentos y bugs en producción <span class="pill a">ASUMIDO</span></p>
+      <h4>4 · Acción esperada</h4>
+      <p>CTA: Agendar reunión de 30 min <span class="pill v">VERIFICADO</span> · Destino: Calendly <span class="pill v">VERIFICADO</span><br>
+      Medición: evento “reunión agendada” en Calendly → GA4 → LinkedIn Ads <span class="pill a">ASUMIDO</span></p>
+      <h4>5 · Canales y presupuesto</h4>
+      <p>LinkedIn (orgánico + ads), SEO, email, landing <span class="pill v">VERIFICADO</span><br>
+      Pauta: 3.500.000 COP/mes en LinkedIn Ads <span class="pill v">VERIFICADO</span></p>
+      <h4>6 · Tiempos</h4>
+      <p>8 semanas, inicio 2026-12-01 <span class="pill a">ASUMIDO</span></p>
+      <h4>7 · Voz</h4>
+      <p>Tono profesional y cercano · español es-CO <span class="pill a">ASUMIDO</span></p>
+      <h4>8 · Supuestos a confirmar</h4>
+      <p>Propuesta de valor, dolor principal, medición vía Calendly, fecha de inicio.</p>
+      <h4>9 · Datos faltantes</h4>
+      <p><span class="pill f">FALTA</span> prueba social: sin ella, los anuncios no pueden citar casos ni cifras.</p>
+    </div>
+    <div class="note">Puntaje ≥ 80 → <b>listo para producir</b>. El brief se muestra para que lo <b>confirmes o corrijas</b> antes de gastar en producción.</div>
+  </div>
+
+  <!-- PANE 4 -->
+  <div class="tabpane" id="p4">
+    <div class="card">
+      <h3>Mensaje central</h3>
+      <p style="font-size:1.1rem">“Lanza software sin miedo: QA automatizado que encuentra los errores antes que tus usuarios.”</p>
+      <h3>Ángulos (2–3)</h3>
+      <ul>
+        <li><b>Ángulo 1 — Costo:</b> “Un bug en producción cuesta más que tu sprint completo.”</li>
+        <li><b>Ángulo 2 — Velocidad:</b> “Libera releases cada semana, no cada trimestre.”</li>
+        <li><b>Ángulo 3 — Cobertura:</b> “Pruebas corriendo 24/7 mientras tu equipo duerme.”</li>
+      </ul>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Embudo y canales</h3>
+        <table>
+          <tr><th>Etapa</th><th>Pieza</th></tr>
+          <tr><td>TOFU</td><td>Posts educativos + guía descargable</td></tr>
+          <tr><td>MOFU</td><td>Caso de estudio + webinar</td></tr>
+          <tr><td>BOFU</td><td>Demo + pricing + CTA reunión</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <h3>Calendario y presupuesto</h3>
+        <table>
+          <tr><th>Semana</th><th>Foco</th></tr>
+          <tr><td>1–2</td><td>Landing + píxel + contenidos TOFU</td></tr>
+          <tr><td>3–6</td><td>LinkedIn Ads + secuencia email</td></tr>
+          <tr><td>7–8</td><td>Retargeting + cierre de agenda</td></tr>
+        </table>
+        <p style="color:var(--muted)">Pauta: 3.500.000 COP/mes → LinkedIn Ads. Orgánico: sin costo directo.</p>
+      </div>
+    </div>
+    <div class="grid grid-4">
+      <div class="kpi"><b>20</b><span>reuniones (8 semanas)</span></div>
+      <div class="kpi"><b>≤ 175k</b><span>COP por lead (CPL)</span></div>
+      <div class="kpi"><b>≥ 1.2%</b><span>CTR anuncios</span></div>
+      <div class="kpi"><b>≥ 15%</b><span>tasa agendamiento landing</span></div>
+    </div>
+    <div class="skillchain">5 · Delegación → product-marketing → customer-research → marketing-plan → analytics + conversion-tracking → keyword-research → copywriting → ad-creative + linkedin-ads → social/linkedin-posts → emails → cro (landing)</div>
+  </div>
+
+  <!-- PANE 5-6 -->
+  <div class="tabpane" id="p56">
+    <div class="card">
+      <h3>Fase 6 · Paquete de campaña (piezas revisadas)</h3>
+      <p style="color:var(--muted)">Cada pieza se produce con la skill correspondiente y se revisa contra políticas de anuncios y sin “frases de IA”.</p>
+    </div>
+    <div class="card">
+      <h3>Anuncio LinkedIn — Ángulo 1 (variante A)</h3>
+      <div class="doc">
+        <p><b>Titular:</b> “¿Cuánto te cuesta un bug en producción?”</p>
+        <p><b>Texto primario:</b> “Cada release sin QA automatizado es una apuesta. Detectamos los errores antes que tus usuarios: cobertura 24/7, integración con tu CI/CD y reportes accionables. Agenda 30 minutos y te mostramos cómo se vería en tu stack. →”</p>
+        <p><b>CTA:</b> Agendar reunión · <b>URL:</b> <span class="mono">https://tuempresa.com/qa?utm_source=linkedin&amp;utm_medium=paid&amp;utm_campaign=qa-colombia&amp;utm_content=angulo-costo</span></p>
+        <p class="meta">Variantes B y C cambian gancho (velocidad / cobertura). Caracteres dentro del límite de LinkedIn.</p>
+      </div>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Post orgánico LinkedIn</h3>
+        <div class="doc">
+          <p><b>Gancho (≤210 car.):</b> “Tu equipo pasa más tiempo arreglando bugs que creando producto.”</p>
+          <p>3 ideas de por qué el QA manual ya no escala + 1 CTA suave a la guía. Termina con pregunta para comentarios.</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Secuencia de email (3 correos)</h3>
+        <div class="doc">
+          <p><b>1 · Bienvenida:</b> entrega la guía “Checklist: QA listo para producción”.</p>
+          <p><b>2 · Caso:</b> historia de un release roto → cómo lo resolvió el QA automatizado.</p>
+          <p><b>3 · CTA:</b> “Agenda 30 min, hacemos una auditoría rápida de tu pipeline”.</p>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Copy de landing</h3>
+        <div class="doc">
+          <p><b>H1:</b> “Lanza software sin miedo.”</p>
+          <p><b>Subtítulo:</b> QA automatizado para equipos que no pueden permitirse bugs en producción.</p>
+          <p><b>Secciones:</b> problema → cómo funciona → resultados → prueba social (FALTA) → CTA “Agenda tu reunión”.</p>
+          <p><b>Formulario:</b> nombre + email + tamaño de empresa (3 campos).</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Brief de imagen</h3>
+        <div class="doc">
+          <p><b>Hero:</b> dashboard de pruebas con un bug marcado en rojo. Estilo limpio, colores de marca.</p>
+          <p><b>Formato:</b> 1200×628 (LinkedIn) + 1200×630 (OG).</p>
+          <p class="meta">Skill <code class="inline">image</code> entrega enfoque (generar/diseñar/fotografiar), prompts y specs.</p>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Tabla de piezas con UTM</h3>
+      <table>
+        <tr><th>Pieza</th><th>Canal</th><th>Fecha</th><th>UTM</th></tr>
+        <tr><td>Anuncio A/B/C</td><td>LinkedIn Ads</td><td>Sem 3</td><td class="mono">utm_campaign=qa-colombia</td></tr>
+        <tr><td>Post orgánico ×3/sem</td><td>LinkedIn</td><td>Sem 1–8</td><td class="mono">utm_medium=organic</td></tr>
+        <tr><td>Email 1-2-3</td><td>Email</td><td>Sem 3–6</td><td class="mono">utm_medium=email</td></tr>
+        <tr><td>Guía descargable</td><td>Web</td><td>Sem 1</td><td class="mono">utm_medium=organic</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- PANE 7 -->
+  <div class="tabpane" id="p7">
+    <div class="card">
+      <h3>Fase 7 · Gate de aprobación (fila por fila)</h3>
+      <p style="color:var(--muted)">El agente muestra <b>cada acción externa</b> con cuenta, fecha, presupuesto y cómo revertirla. Solo cuenta lo que apruebas en el chat: <code class="inline">“apruebo 1 y 3”</code>.</p>
+      <table>
+        <tr><th>#</th><th>Acción</th><th>Contenido</th><th>Cuenta</th><th>Fecha</th><th>Presupuesto</th><th>Cómo se revierte</th></tr>
+        <tr><td>1</td><td>Publicar post orgánico</td><td>“Tu equipo pasa más tiempo arreglando bugs…”</td><td>LinkedIn empresa</td><td>2026-12-01 09:00 COT</td><td>—</td><td>Eliminar post</td></tr>
+        <tr><td>2</td><td>Crear campaña <b>en pausa</b></td><td>3 anuncios, ángulos costo/velocidad/cobertura</td><td>LinkedIn Ads</td><td>2026-12-01</td><td>3.500.000 COP/mes</td><td>Queda en pausa; no se activa</td></tr>
+        <tr><td>3</td><td>Programar secuencia email</td><td>3 correos de nurturing</td><td>HubSpot</td><td>Sem 3</td><td>—</td><td>Desactivar flujo</td></tr>
+        <tr><td>4</td><td>Publicar landing</td><td>Copy completo + formulario</td><td>Web</td><td>Sem 1</td><td>—</td><td>Restaurar versión anterior</td></tr>
+      </table>
+      <div class="note warn"><b>Importante:</b> la campaña de pauta (fila 2) se crea <b>en pausa</b>. Activarla es <b>otra</b> aprobación aparte. Un aumento de gasto &gt; 20% sobre lo aprobado exige nueva aprobación.</div>
+    </div>
+  </div>
+
+  <!-- PANE 8-9 -->
+  <div class="tabpane" id="p89">
+    <div class="card">
+      <h3>Fase 8 · Publicación (solo lo aprobado, vía MCP)</h3>
+      <table>
+        <tr><th>Acción</th><th>Resultado</th></tr>
+        <tr><td>Post orgánico LinkedIn</td><td>Publicado → <span class="mono">ID post-bridge: 88371</span></td></tr>
+        <tr><td>Campaña LinkedIn Ads</td><td>Creada <b>en pausa</b> → <span class="mono">campaign_id: 4412</span></td></tr>
+        <tr><td>Secuencia email HubSpot</td><td>Programada → <span class="mono">workflow_id: 1207</span></td></tr>
+        <tr><td>Meta Ads (sin conector)</td><td><b>Paquete manual:</b> estructura, audiencias y pasos en Ads Manager; recordatorio de crearla en pausa y verificar el píxel antes de activar.</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Fase 9 · Reporte</h3>
+      <div class="grid grid-2">
+        <div>
+          <p><b>Qué se hizo y con qué skill:</b> brief (director), landing (copywriting + cro), anuncios (ad-creative + linkedin-ads), emails (emails), posts (social + linkedin-posts), medición (analytics + conversion-tracking).</p>
+          <p><b>Pendientes:</b> activar la campaña de LinkedIn Ads (requiere tu aprobación) y aportar prueba social para las variantes B y C.</p>
+        </div>
+        <div>
+          <p><b>KPIs a vigilar:</b> reuniones agendadas (meta 20), CPL ≤ 175.000 COP, CTR ≥ 1.2%, tasa de agendamiento ≥ 15%.</p>
+          <p><b>Lo que no pude determinar:</b> <span class="pill f">FALTA</span> prueba social y métricas históricas (no hay línea base previa).</p>
+        </div>
+      </div>
+      <div class="note ok"><b>Línea base actualizada:</b> <code class="inline">resources/linea-base/Linea_Base_QA-Colombia.md</code> guarda decisiones, supuestos confirmados, cuentas conectadas y aprendizajes para la próxima iteración. Vuelve con “¿cómo va la campaña?” y el agente lee métricas por MCP y reporta contra estos KPIs.</div>
+    </div>
+  </div>
+
+  <!-- ======================= ARTEFACTOS ======================= -->
+  <h2><span class="num">3</span> Artefactos que puede generar</h2>
+  <div class="card">
+    <table>
+      <tr><th>Artefacto</th><th>Fase</th><th>Formato</th><th>Quién lo genera</th></tr>
+      <tr><td>Brief de campaña</td><td>3</td><td>Markdown, con puntaje de completitud y etiquetas</td><td>director-marketing</td></tr>
+      <tr><td>Estrategia y plan</td><td>4</td><td>Mensaje central, ángulos, embudo, calendario, presupuesto, KPIs</td><td>director-marketing</td></tr>
+      <tr><td>Paquete de campaña</td><td>6</td><td>Piezas por canal y fecha + enlaces UTM</td><td>productor-marketing</td></tr>
+      <tr><td>Tabla de aprobación</td><td>7</td><td>Una fila por acción externa, con reversión</td><td>director-marketing</td></tr>
+      <tr><td>Publicaciones / campañas</td><td>8</td><td>IDs o URLs de la plataforma, o paquete manual</td><td>publicador-marketing</td></tr>
+      <tr><td>Reporte</td><td>9</td><td>KPIs, pendientes, “lo que no pude determinar”</td><td>director-marketing</td></tr>
+      <tr><td>Línea base</td><td>9</td><td><code class="inline">resources/linea-base/Linea_Base_&lt;Proyecto&gt;.md</code></td><td>director-marketing</td></tr>
+      <tr><td>Contexto de producto</td><td>—</td><td><code class="inline">.agents/product-marketing.md</code> (ICP, posicionamiento, voz)</td><td>product-marketing</td></tr>
+      <tr><td>Perfiles de competidores</td><td>—</td><td><code class="inline">resources/competidores/</code></td><td>competitor-profiling</td></tr>
+      <tr><td>Plan de marketing</td><td>—</td><td><code class="inline">resources/planes/&lt;cliente&gt;/final_plan.md</code></td><td>marketing-plan</td></tr>
+      <tr><td>JSON-LD / schema</td><td>—</td><td>Código listo para implementar</td><td>schema</td></tr>
+      <tr><td>Lista de prospectos</td><td>—</td><td>Tabla o CSV calificado</td><td>prospecting</td></tr>
+    </table>
+    <p style="color:var(--muted)">El resto de salidas (piezas, brief, reportes) se entregan en la conversación; pídele al agente que las guarde como archivo si las necesitas.</p>
+  </div>
+
+  <!-- ======================= CATÁLOGO ======================= -->
+  <h2><span class="num">4</span> Mapa rápido de skills</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Pedido → recorrido</h3>
+      <table>
+        <tr><th>Pides</th><th>Recorrido principal</th></tr>
+        <tr><td>“Vender más cursos”</td><td>product-marketing → customer-research → marketing-plan → tracking → keywords → copy → ads → redes → email → landing</td></tr>
+        <tr><td>“No aparecemos en Google”</td><td>seo-audit → keyword-research → seo-strategy → site-architecture/schema → content-strategy</td></tr>
+        <tr><td>“Anuncios en LinkedIn”</td><td>analytics + conversion-tracking → ads → linkedin-ads → ad-creative → cro</td></tr>
+        <tr><td>“Publica algo del evento”</td><td>social → linkedin-posts → image → copy-editing</td></tr>
+        <tr><td>“¿Por qué no funcionan mis anuncios?”</td><td>analytics → ads → attribution</td></tr>
+        <tr><td>“Lanzar producto nuevo”</td><td>gtm-strategy → offers/pricing → launch → campaña completa</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Grupos de skills</h3>
+      <ul>
+        <li><b>Estrategia:</b> marketing-plan, gtm-strategy, growth-funnel, marketing-council, marketing-ideas…</li>
+        <li><b>Oferta y precio:</b> offers, pricing, launch, product-launch, discount-marketing-strategy…</li>
+        <li><b>SEO:</b> seo-audit, keyword-research, content-strategy, schema, local-seo, ai-seo, aso…</li>
+        <li><b>Pauta y medición:</b> ads, google-ads, meta-ads, linkedin-ads, tiktok-ads, analytics, conversion-tracking, attribution, ab-testing…</li>
+        <li><b>Contenido y redes:</b> copywriting, copy-editing, social, linkedin-posts, emails, sms, video, image, cold-email, prospecting…</li>
+        <li><b>Marca:</b> branding, brand-monitoring, brand-protection, rebranding-strategy…</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ======================= EMPEZAR ======================= -->
+  <h2><span class="num">5</span> Cómo empezar hoy</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Con GitHub Copilot (VS Code)</h3>
+      <ol>
+        <li>Abre esta carpeta en VS Code con Copilot Chat.</li>
+        <li>Escribe <code class="inline">/campana-desde-idea</code> y tu idea en una frase.</li>
+        <li>Sigue los handoffs: <b>director → productor → publicador</b>.</li>
+        <li>Para MCP: copia <code class="inline">.vscode/mcp.ejemplo.json</code> a <code class="inline">.vscode/mcp.json</code> y autoriza por OAuth.</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3>Con Claude Code</h3>
+      <ol>
+        <li>Ejecuta <code class="inline">claude --agent director-marketing</code>.</li>
+        <li>Escribe tu idea. El agente hace las preguntas bloqueantes.</li>
+        <li>Confirma el brief y revisa la estrategia.</li>
+        <li>Aprueba fila por fila la tabla de aprobación.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="note"><b>Tip de primera prueba:</b> no conectes redes reales aún. Sin conectores, el kit entrega el paquete listo para copiar y pegar, y las salidas quedan solo en tu equipo (<code class="inline">resources/</code> está en <code class="inline">.gitignore</code>).</div>
+
+  <footer>
+    Demo ilustrativa del <b>Kit de Marketing Agéntico</b> · Los datos del ejemplo son ficticios y se etiquetan como <span class="pill v">VERIFICADO</span> / <span class="pill a">ASUMIDO</span> / <span class="pill f">FALTA</span> igual que hace el agente real.
+  </footer>
+</div>
+
+<script>
+  const tabs = document.querySelectorAll('#tabs .tab');
+  const panes = document.querySelectorAll('.tabpane');
+  tabs.forEach(t => {
+    t.addEventListener('click', () => {
+      tabs.forEach(x => x.classList.remove('active'));
+      panes.forEach(p => p.classList.remove('active'));
+      t.classList.add('active');
+      document.getElementById(t.dataset.pane).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

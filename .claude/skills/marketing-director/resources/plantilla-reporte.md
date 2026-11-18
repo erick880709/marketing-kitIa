@@ -1,6 +1,6 @@
 # Plantilla de reporte de campaña
 
-Usa esta estructura al cerrar la Fase 9 y cada vez que el usuario pida el estado de una campaña. Ajusta la longitud al tipo de solicitud: una pieza suelta solo necesita las secciones 1, 4 y 6.
+Usa esta estructura al cerrar la Fase 9 y cada vez que el usuario pida el estado de una campaña. Guárdalo en `resources/reportes/` (crea la carpeta si no existe). Ajusta la longitud al tipo de solicitud: una pieza suelta solo necesita las secciones 1, 4 y 6.
 
 ```markdown
 # Reporte: <nombre de la campaña>

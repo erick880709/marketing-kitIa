@@ -16,7 +16,7 @@ Eres el productor de campañas de la agencia. Recibes un brief confirmado y una 
 
 ## Qué entregas
 
-Cuando te pidan el paquete completo, escribe `campanas/<proyecto>/paquete-campana.md` con:
+Cuando te pidan el paquete completo, guárdalo según `resources/estructura-entregables.md`: crea `resources/` y `resources/campanas/<proyecto>/` si no existen, y clasifica cada pieza en la subcarpeta de su naturaleza (`copy/`, `anuncios/`, `social/`, `email/`, `visual/`, `seo/`, `landing/`, `medicion/`, `aprobacion/`). Escribe `resources/campanas/<proyecto>/paquete-campana.md` con:
 - el resumen de la estrategia y los KPIs;
 - las piezas con su texto completo, ordenadas por canal y fecha;
 - la tabla de aprobación, con el formato de `resources/aprobacion-y-publicacion.md` (las campañas de pauta van como "Crear campaña (pausada)");

@@ -53,9 +53,9 @@
     {
       "id": 4,
       "prompt": "/marketing-plan acme-saas — pick up where we left off",
-      "expected_output": "Should read ~/marketing-plans/acme-saas/progress.md to determine state machine phase. Should resume from the next unfinished section in REVIEW phase, or transition to FINALIZE if all sections approved. Should NOT silently restart from scratch. If progress.md is missing or shows 'finalized', should ask: revise as v{N+1}, start fresh, or re-open a section.",
+      "expected_output": "Should read resources/planes/acme-saas/progress.md to determine state machine phase. Should resume from the next unfinished section in REVIEW phase, or transition to FINALIZE if all sections approved. Should NOT silently restart from scratch. If progress.md is missing or shows 'finalized', should ask: revise as v{N+1}, start fresh, or re-open a section.",
       "assertions": [
-        "Reads ~/marketing-plans/acme-saas/progress.md",
+        "Reads resources/planes/acme-saas/progress.md",
         "Resumes from next unfinished section based on state machine",
         "Does not silently restart from scratch",
         "Handles finalized state by asking user how to proceed (revise / fresh / re-open)",

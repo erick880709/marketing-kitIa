@@ -23,7 +23,7 @@ Use three to five competitors. Fewer than three gives no pattern; more than six 
 ## Run the Comparison
 
 ```bash
-node <skill-dir>/scripts/teardown.mjs compare a.com b.com c.com --you yours.com --out teardowns/landscape/matrix.csv
+node <skill-dir>/scripts/teardown.mjs compare a.com b.com c.com --you yours.com --out resources/teardowns/landscape/matrix.csv
 ```
 
 For each domain, `compare` reads, all for free:
@@ -75,7 +75,7 @@ Rank the competitors by: growth rate (same vendor), the number of `only_one` bet
 
 ## The Landscape Deliverable
 
-`teardowns/landscape/landscape.md`:
+`resources/teardowns/landscape/landscape.md`:
 
 1. **The field:** one line per company with headline, traffic trend, and open roles
 2. **Table stakes:** what everyone does, and which of these the user lacks
