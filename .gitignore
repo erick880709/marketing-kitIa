@@ -1,0 +1,22 @@
+# Secretos y credenciales (nunca se suben)
+.env
+.env.*
+*.pem
+*.key
+credentials*.json
+.claude/settings.local.json
+
+# Datos de clientes y salidas de pruebas (cada persona los genera localmente)
+campanas/
+.agents/
+Linea_Base_*.md
+competitor-profiles/
+teardowns/
+
+# Repositorio fuente de referencia (público en github.com/coreyhaines31/marketingskills)
+marketingskills-main/
+*.zip
+
+# Sistema
+.DS_Store
+Thumbs.db

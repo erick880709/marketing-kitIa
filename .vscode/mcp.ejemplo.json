@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "post-bridge": { "type": "http", "url": "https://www.post-bridge.com/api/mcp/mcp" },
+    "meta-ads": { "type": "http", "url": "https://mcp.facebook.com/ads" },
+    "hubspot": { "type": "http", "url": "https://mcp.hubspot.com" },
+    "semrush": { "type": "http", "url": "https://mcp.semrush.com/v2/mcp" }
+  }
+}
